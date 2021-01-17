@@ -40,57 +40,67 @@ arduino.write(b"G92 X0 Y0\n")          #set current position as 00 (calibrar en 
 arduino.flush()
 #................................................................................................
 #definicion de variables e input
-xrange=float(input("ingrese ancho x de muestreo [mm]"))
-yrange=float(input("ingrese largo y de muestreo[mm]"))
-pasos=float(input("ingrese pasos de muestreo (numero de imagenes):"))
+xrange=float(input("ingrese ancho x de muestreo [mm]"))#200
+yrange=float(input("ingrese largo y de muestreo[mm]"))#50
+pasos=float(input("ingrese pasos de muestreo (numero de imagenes):"))#10
 
 xstep=int(xrange/pasos)
-
 ystep=int(yrange/pasos)
-mov='G0 X'+str(xstep) + " Y" +str(ystep) + " \\" +'n'
-print(mov)
+movx='G0 X'+str(xstep) + " \\" +'n'
+movy='G0 Y'+str(ystep) + " \\" +'n'
+print(movx)
 
 
 
 #................................................................................................
-#bucles while, zigzag 
-j=0
-while j<pasos:
-    j+=1
-    arduino.write(bytes(mov,'utf-8'))
-    #arduino.write(b"G0 X20 Y5\n") 
-    arduino.flush()
-    arduino.write(b" M114 \n")
-    arduino.flush()
-    arduino.write(b" M400 \n")
-    arduino.flush()
+#bucles while, zigzag
+i=0
+#arduino.write(b"G0 Y-50\n")
+arduino.flush()
+while i<pasos:
+    j=0
+    i+=1
+    while j<pasos:
+        j+=1
+        #arduino.write(bytes(movx,'utf-8'))
+        arduino.write(b"G0 X20 \n") 
+        arduino.flush()
+        arduino.write(b" M114 \n")
+        arduino.flush()
+        arduino.write(b" M400 \n")
+        arduino.flush()
 #arduino.write(b" M280 \n")    #Set or get the position of a servo.
 #arduino.flush()
 ##
 
 
 #ser_bytes = str(arduino.readline())
-    string1="b'echo:busy: processing" + "\\" + "n'"
+        string1="b'echo:busy: processing" + "\\" + "n'"
 
-    string2="b'ok" + "\\" + "n'"
+        string2="b'ok" + "\\" + "n'"
 
-    print(string1)
-    arduino.flushInput()
-
-    s =string1
-
-    while True:
-        print(s)
-        ser_bytes =arduino.readline()
-        s=str(ser_bytes)
+        print(string1)
         arduino.flushInput()
-        arduino.flushOutput()
-        if s==string2:
-            print("saving image...")
-            os.system("sudo python take_images.py "+dirname+ "/nombre_" +str(j) + " 1")
-        break
-    arduino.write(b"G28 X \n") #regresa a x=0  
 
+        s =string1
+
+        while True:
+            print(s)
+            ser_bytes =arduino.readline()
+            s=str(ser_bytes)
+            arduino.flushInput()
+            arduino.flushOutput()
+            if s==string2:
+                print("saving image...")
+                os.system("sudo python take_images.py "+dirname+ "/x" +str(j) +"y" +str(i)+ " 1")
+            break
+    arduino.flush()    
+    #arduino.write(b"G28 X \n") #regresa a x=0
+    arduino.write(b"G0 X-60 \n")
+    arduino.flush()
+    time.sleep(5)
+    #arduino.write(bytes(movy,'utf-8'))
+    arduino.write(b"G0 Y5 \n")
 ##
 #output=arduino.read(5)
 #print(str(output,'utf8'))
