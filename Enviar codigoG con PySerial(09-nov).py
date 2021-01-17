@@ -55,7 +55,8 @@ print(movx)
 #................................................................................................
 #bucles while, zigzag
 i=0
-#arduino.write(b"G0 Y-50\n")
+arduino.write(b"G0 X-200 Y-50\n")
+time.sleep(10)
 arduino.flush()
 while i<pasos:
     j=0
@@ -63,7 +64,7 @@ while i<pasos:
     while j<pasos:
         j+=1
         #arduino.write(bytes(movx,'utf-8'))
-        arduino.write(b"G0 X20 \n") 
+        arduino.write(b"G0 X30 \n") 
         arduino.flush()
         arduino.write(b" M114 \n")
         arduino.flush()
@@ -96,9 +97,9 @@ while i<pasos:
             break
     arduino.flush()    
     #arduino.write(b"G28 X \n") #regresa a x=0
-    arduino.write(b"G0 X-60 \n")
+    arduino.write(b"G0 X-200 \n")
     arduino.flush()
-    time.sleep(5)
+    time.sleep(10)
     #arduino.write(bytes(movy,'utf-8'))
     arduino.write(b"G0 Y5 \n")
 ##
