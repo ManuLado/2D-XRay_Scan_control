@@ -1,17 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
-
-
-
-
-# In[85]:
-
-
-
-
 import cv2  #opencv library
 import numpy as np
 
