@@ -1,6 +1,6 @@
 import cv2
 import os
-
+#script que une imagenes. modificar para que una consecutivamente las que tomo en cada fila y luego para que una las filas entre si
 
 stitcher = cv2.createStitcher(cv2.Stitcher_SCANS)
 stitcher.setPanoConfidenceThresh(0.0) # might be too aggressive for real examples
