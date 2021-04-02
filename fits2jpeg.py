@@ -4,20 +4,23 @@
 
 import os
 
-mylist=os.listdir('date_2021-03-31_run_46') #modify to change directory dynamically
-print("number of files:",len(mylist))
-print(mylist)
+def directory_name(nombre):
+    directorio=nombre
 
-input("Enter to continue..")
-for i in mylist:
-    string1=str(i)
+    mylist=os.listdir(directorio) #modify to change directory dynamically
+    print("number of files:",len(mylist))
+    print(mylist)
+
+    input("Enter to continue..")
+    for i in mylist:
+        string1=str(i)
     
-    str2=string1.replace('fits','png') #aca cambiar tambien el formato elejido
-    #comandos ds9:
+        str2=string1.replace('fits','jpeg') #aca cambiar tambien el formato elejido
+        #comandos ds9:
         #-cd> set working directory
         #-file> open .fits file
         #-cmap> mapa de colores (Heat, h5_bone,gray,etc)
         #-export> guardar imagen (png,jpeg,etc)
-    os.system("ds9 -cd date_2021-03-31_run_46 -file "+string1+" -cmap h5_bone -export png "+str2+' -exit')
-    
+        os.system("ds9 -cd "+directorio + " -file "+string1+" -cmap h5_bone -export jpeg "+str2+' 75 -exit')
+        print(str2,"------Ready!")
     
