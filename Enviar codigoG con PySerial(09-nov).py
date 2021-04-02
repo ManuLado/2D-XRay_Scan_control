@@ -42,8 +42,8 @@ arduino.write(b"G92 X0 Y0\n")          #set current position as 00 (calibrar en 
 arduino.flush()
 #................................................................................................
 #definicion de variables e input
-gcode=str(input("<<<<ingrese codigo g>>>>:"))
-arduino.write(bytes(gcode,'utf-8'))
+#gcode=str(input("<<<<ingrese codigo g>>>>:"))
+#arduino.write(bytes(gcode,'utf-8'))
 
 inp=input("<<<<CONTINUAR. presione cualquier tecla("'exit'" para salir)>>>>>")
 if inp=="exit" or inp=="EXIT":
@@ -54,6 +54,9 @@ xrange=float(input("<<<<ingrese ancho x de muestreo [mm]>>>>"))#200
 yrange=float(input("<<<<ingrese largo y de muestreo[mm]>>>>"))#50
 pasos=float(input("<<<<ingrese pasos de muestreo (numero de imagenes)>>>>:"))#10
 
+
+noitt=1 #numberofimagestotake
+
 xstep=int(xrange/pasos)
 ystep=int(yrange/pasos)
 movx='G0 X'+str(xstep) + " \\" +'n'
@@ -63,27 +66,27 @@ rny='G0 X0 Y'+str(int(yrange)) + " \\" +'n'
 print(movx)
 
 arduino.flush()
-arduino.write(bytes(movy,'utf-8'))
-#arduino.write(b"G0 Y-50\n")
+#arduino.write(bytes(movy,'utf-8'))
+arduino.write(b"G0 Y-50\n")
 arduino.flush()
 a=arduino.readline()
 print("arduino dice:",a)
 
 
 #................................................................................................
-#bucles while, zigzag
+#bucles while, zigzag("no es guarda griega")
 i=0
-arduino.write(b"G0 Y-50\n")
+arduino.write(b"G0 X-200 Y50\n")
 
 time.sleep(10)
 arduino.flush()
-while i<pasos:
+while i<xstep:
     j=0
     i+=1
-    while j<pasos:
+    while j<ystep:
         j+=1
-        arduino.write(bytes(movx,'utf-8'))
-        #arduino.write(b"G0 X30 \n")
+        #arduino.write(bytes(movx,'utf-8'))
+        arduino.write(b"G0 X30 \n")
         a=arduino.readline()
         print("arduino dice:",a)
         arduino.flush()
@@ -114,16 +117,24 @@ while i<pasos:
             arduino.flushOutput()
             if s==string2:
                 print("saving image...")
-                os.system("sudo python take_images.py "+dirname+ "/x" +str(j) +"y" +str(i)+ " 1")
+                filename=dirname+ "/x" +str(j) +"y" +str(i)+".fits"
+                
+                os.system("sudo python take_images.py "+dirname+ "/x" +str(j) +"y" +str(i)+" "+str(noitt))
+                time.sleep(4)
+                while True:
+                    print("checking file existance...",filename)
+                    if os.path.isfile(filename)==True:
+                        print("checked!")
+                        break    
             break
     arduino.flush()    
     #arduino.write(b"G28 X \n") #regresa a x=0
-    #arduino.write(b"G0 X-200 \n")
-    arduino.write(bytes(movx,'utf-8'))
+    arduino.write(b"G0 X-200 \n")
+    #arduino.write(bytes(movx,'utf-8'))
     arduino.flush()
     time.sleep(10)
-    arduino.write(bytes(movy,'utf-8'))
-    #arduino.write(b"G0 Y5 \n")
+    #arduino.write(bytes(movy,'utf-8'))
+    arduino.write(b"G0 Y-5 \n")
 ##
 #output=arduino.read(5)
 #print(str(output,'utf8'))
@@ -155,6 +166,11 @@ string="b'ok" + "\\" + "n'"
 #print(ser_bytes)
 print(string)
 
+print("===============================================================")
+print("converting .fits to .jpeg ...........")
+print("===============================================================")
+import fits2jpeg
+fits2jpeg.directory_name(dirname)
 
 # In[ ]:
 
