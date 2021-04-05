@@ -8,6 +8,8 @@ from datetime import date
 import datetime
 import os
 import sys
+#import thread as thread
+
 
 #/////////////////////////////////
 if not os.path.exists('logdir.txt'):
@@ -102,18 +104,14 @@ while i<xstep:
 
 #ser_bytes = str(arduino.readline())
         string1="b'echo:busy: processing" + "\\" + "n'"
-
         string2="b'ok" + "\\" + "n'"
-
-        print(string1)
         arduino.flushInput()
-
-        s =string1
+        s = string1 #string estado de arduino
 
         while True:
-            print(s)
-            ser_bytes =arduino.readline()
-            s=str(ser_bytes)
+            s=str(arduino.readline())
+            print("s",s)
+            #ser_bytes =
             arduino.flushInput()
             arduino.flushOutput()
             time.sleep(5)
@@ -127,8 +125,8 @@ while i<xstep:
                     print("checking file existance...",filename)
                     if os.path.isfile(filename)==True:
                         print("checked!")
-                    break    
-            break
+                        break    
+                break
     arduino.flush()    
     #arduino.write(b"G28 X \n") #regresa a x=0
     arduino.write(b"G0 X-200 \n")
