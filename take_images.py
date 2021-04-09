@@ -84,7 +84,7 @@ regArr=[[0x01, 0x000C], # Row Start
     [0x05, 0x0009], # Horizontal Blanking
     [0x06, 0x0019], # Vertical Blanking
     [0x07, 0x0002], # Output Control
-        [0x09, 0x0419], # Shutter Width 0x0419 (max: 0x3FFF)
+    [0x09, 0x0419], # Shutter Width 0x0419 (max: 0x3FFF)
     [0x0B, 0x0000], # Frame Restart
     [0x0C, 0x0000],#0x0100], 
     [0x0D, 0x0000], 
@@ -121,7 +121,8 @@ shutterWidth = regArr[7][1]
 integrationPeriods = shutterWidth*rowTime - overheadTime - resetDelay;
 clockPeriod = 1000.0/24e6; #[ms]
 integrationTime = integrationPeriods * clockPeriod; #[ms]
-
+with open('integrationtime.txt','w') as it:
+    it.write(str(integrationTime)+"\n")
 
 print ("Initial integration time: %.3fms"%(integrationTime));
 print ("Initial gain: 0x%02x"%(globalGain));
@@ -195,6 +196,7 @@ def showAndSave(threadName,algoquenoseusa):
 
             saveNum += 1
             #name = NOMBREIMG + str(saveNum) + ".fits"
+	    #name = NOMBREIMG + "_" + str(saveNum) + ".jpeg"
             name = NOMBREIMG + ".fits"
             hdu=fits.PrimaryHDU()
             hdu.data=img
@@ -251,5 +253,4 @@ def init_and_read_arducam():
 if __name__ == "__main__":
 	initTime = time.time();
 	init_and_read_arducam();
-
 

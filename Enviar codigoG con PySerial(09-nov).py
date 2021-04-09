@@ -66,11 +66,11 @@ movx='G0 X'+str(xstep) + " \\" +'n'
 movy="G0 Y"+str(ystep) + " \\" +'n'
 rnx='G0 X'+str(int(xrange)) + " \\" +'n'
 rny='G0 X0 Y'+str(int(yrange)) + " \\" +'n'
-print(movx)
+#print(movx)
 
 arduino.flush()
 #arduino.write(bytes(movy,'utf-8'))
-arduino.write(b"G0 Y-50\n")
+arduino.write(b"G0 X200 Y-50\n")
 arduino.flush()
 a=arduino.readline()
 print("arduino dice:",a)
@@ -79,7 +79,7 @@ print("arduino dice:",a)
 #................................................................................................
 #bucles while, zigzag
 i=0
-arduino.write(b"G0 X-200 Y50\n")
+arduino.write(b"G0 X-300 Y50\n")
 
 time.sleep(10)
 arduino.flush()
@@ -110,7 +110,7 @@ while i<xstep:
 
         while True:
             s=str(arduino.readline())
-            print("s",s)
+            #print("s",s)
             #ser_bytes =
             arduino.flushInput()
             arduino.flushOutput()
@@ -127,6 +127,7 @@ while i<xstep:
                         print("checked!")
                         break    
                 break
+        print("--------Numero de imagenes tomadas hasta ahora:", j*i)
     arduino.flush()    
     #arduino.write(b"G28 X \n") #regresa a x=0
     arduino.write(b"G0 X-200 \n")
@@ -135,6 +136,7 @@ while i<xstep:
     time.sleep(10)
     #arduino.write(bytes(movy,'utf-8'))
     arduino.write(b"G0 Y-5 \n")
+    print("Escaneo copmletado")
 ##
 #output=arduino.read(5)
 #print(str(output,'utf8'))
@@ -162,9 +164,9 @@ arduino.close()
 # In[1]:
 
 
-string="b'ok" + "\\" + "n'"
+#string="b'ok" + "\\" + "n'"
 #print(ser_bytes)
-print(string)
+#print(string)
 
 
 c=len(os.listdir(dirname))
@@ -175,17 +177,31 @@ import fits2jpeg
 fits2jpeg.directory_name(dirname)
 
 
-# write log
-#from fits2jpeg import c
-#from take_images import Width, Height,integrationTime,shutterWidth
+# ----------------------------------------------------write logfile
+
 tkimgs=open('take_images.py')
+
+
 content = tkimgs.readlines()
 
+ct86=content[86]
+ct86=ct86.replace(", # Shutter Width 0x0419 (max: 0x3FFF)"," pp")
+ct86=ct86.replace("0x09"," **")
+ct86=ct86.lstrip("[ **, ")
+ct86=ct86.replace("] pp","")
 
+ct97=content[97]
+ct97=ct97.replace(", # Global Gain 0x0008 (max: 0x0067)"," pp")
+ct97=ct97.replace("0x35"," **")
+ct97=ct97.lstrip("[ **, ")
+ct97=ct97.replace("] pp","")
+
+itt=open('integrationtime.txt')
+content2 = itt.readlines()
 
 with open(str(dirname)+'/log.txt','w') as f:
-    f.write('directorio: '+str(dirname)+"\n")
-    f.write('fecha: '+str(date.today())+"\n")
+    f.write('Directorio: '+str(dirname)+"\n")
+    f.write('Fecha: '+str(date.today())+"\n")
     f.write('Nombre de muestra: '+str(samplename)+"\n")
     f.write('Numero de imagenes tomadas: '+str(c)+"\n")
     f.write('----------Parametros de camara------------- '+"\n")
@@ -193,8 +209,9 @@ with open(str(dirname)+'/log.txt','w') as f:
     
     f.write('Ancho del sensor: '+str(content[43])+"\n")
     f.write('Alto del sensor: '+str(content[44])+"\n")
-    f.write('Ancho del obturador: '+str(content[86])+"\n")
-    f.write('Ganancia global: '+str(content[97])+"\n")
+    f.write('Ancho del obturador: '+str(int(ct86, 16))+"\n")
+    f.write('Ganancia global: '+str(int(ct97, 16))+"\n")
+    f.write('Tiempo de integracion [ms]: '+str(content2[0])+"\n")
     
     f.write('----------Parametros de muestreo------------- '+"\n")
     f.write('ancho x de muestreo [mm]: '+str(xrange)+"\n")
