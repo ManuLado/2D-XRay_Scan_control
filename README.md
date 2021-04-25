@@ -1,6 +1,6 @@
 # Enviar-comandos-a-marlin
 
-Uso: correr Run.py con python Run.py o desde el IDE de python
+Uso: correr Run.py con $python Run.py$ o desde el IDE de python
 
 
 
