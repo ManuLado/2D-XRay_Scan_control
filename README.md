@@ -1,6 +1,6 @@
 # Enviar-comandos-a-marlin
 
-Uso: correr Run.py con $python Run.py$ o desde el IDE de python
+Uso: correr Run.py con *python Run.py* o desde el IDE de python
 
 
 
@@ -10,16 +10,16 @@ configurar puerto de camara https://thepihut.com/blogs/raspberry-pi-tutorials/16
 Instalar paquetes necesarios:
 
 
-  sudo raspi-config
+sudo raspi-config
 
 
-  sudo apt-get install saods9
+sudo apt-get install saods9
 
 
-  sudo apt-get install python
+sudo apt-get install python
 
 
-  sudo apt-get install python-opencv
+sudo apt-get install python-opencv
 
 
-  sudo pip install astropy
+sudo pip install astropy
