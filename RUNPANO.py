@@ -1,3 +1,14 @@
+#llama a los algoritmos de stiching P0, P1, P2, P3 y P4
+#que estan en la carpeta pano_libs
+#uso: escribir en consola python RUNPANO.py
+#el programa pedira la carpeta "folder"(dire), que es a 
+#donde se encuentran las imagenes a stitchear.
+#cada metodo devuelve una imagen panoramica o una serie de
+#imagenes que se pueden volver a stitchear hasta obtener 
+#una panoramica satisfactoria.
+
+
+
 import os
 
 dire=str(input('folder'))
