@@ -1,4 +1,4 @@
-# Enviar-comandos-a-marlin
+# 2D-XRay_Scan_control
 
 Uso: correr Run.py con *python Run.py* o desde el IDE de python
 
