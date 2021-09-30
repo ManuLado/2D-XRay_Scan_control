@@ -1,3 +1,12 @@
+
+'''
+realiza un procesado del stack de imagenes totales en un directorio;
+    para cada posicion x_y_ realiza un promedio con suma_stack(nombre,posicion),
+    elimina las imagenes oscuras con eliminar_oscuras(nombre,posicion,stack_sumado)
+    usando como umbral el valor medio del promedio del stack.
+    luego aplica filtros FFT y realiza un ajuste de iluminacion. 
+'''
+
 from astropy.io import fits
 import os
 import numpy as np
@@ -29,11 +38,11 @@ def suma_stack(nombre,posicion):
             except:
                 pass
     print('numero de imagenes sumadas',cuenta)
-    return suma
+    return suma/cuenta  #/cuenta para hacer el promedio
 
 def eliminar_oscuras(nombre,posicion,stack_sumado):
     directorio=nombre
-    umbral1=200#np.mean(stack_sumado)
+    umbral1=np.mean(stack_sumado)
     print('umbral1',umbral1)
     umbral2=100
     mylist=os.listdir(directorio) #modify to change directory dynamically
@@ -160,21 +169,73 @@ def automatic_brightness_and_contrast(image, clip_hist_percent=1):
     auto_result = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
     return (auto_result, alpha, beta)
 
-directory='2021-05-16_caballitodenuevo_run_91'
+def disigmoidScaling(values, steepnessFactor=1, ref=None):
+    ''' Sigmoid scaling in which values around a reference point are flattened
+    arround a reference point
 
+    Scaled value y is calculated as 
+        y = sign(v - d)(1 - exp(-((x - d)/s)**2)))
+    where v is the original value,  d is the referenc point and s is the 
+    steepness factor
+    '''
+    if ref is None:
+        mn = np.min(values)
+        mx = np.max(values)
+        ref = mn + (mx - mn) / 2.0
+
+    sgn = np.sign(values - ref)
+    term1 = ((values - ref)/steepnessFactor) ** 2
+    term2 = np.exp(- term1) 
+    term3 = 1.0 - term2 
+    return sgn * term3
+
+
+f=open('ij.txt','r')
+valor=f.readlines(0)
+xstep=int(valor[0])
+ystep=int(valor[1])
+directory=valor[3].replace("\n","")
+
+
+
+#directory='../2021-09-28_arandelaxplastico_run_116'
 if os.path.isdir(directory+'FFT')==False:
     os.mkdir(directory+'FFT')
 
 
-for ix in range(1,4):
-    for iy in range (1,10):
+import matplotlib
+
+
+#xstep=1
+#ystep=1
+
+for iy in range (1,ystep+1):
+    for ix in range(1,xstep+1):    
         print(ix,iy)
         posit='x'+str(ix)+'y'+str(iy)
         sumatoria=suma_stack(directory,posit)
         suma_sin_oscuras=eliminar_oscuras(directory,posit,sumatoria)
-        imagen=low_pass_filter(suma_sin_oscuras,47)
+        imagen=low_pass_filter(suma_sin_oscuras,77)
         #imagen=high_pass_filter(suma_sin_oscuras,100)
 
         auto_result, alpha, beta = automatic_brightness_and_contrast(imagen)
 
-        plt.imsave(directory+'FFT/'+posit+'.jpg',auto_result,format='jpg',cmap="Greys_r")
+
+        scale_percent = 70 # percent of original size
+        width = int(auto_result.shape[1] * scale_percent / 100)
+        height = int(auto_result.shape[0] * scale_percent / 100)
+        dim = (width, height)
+        resized = cv2.resize(auto_result, dim, interpolation = cv2.INTER_NEAREST)
+        #damped=disigmoidScaling(resized, 1.5)
+        plt.imsave(directory+'FFT/'+posit+'.jpg',resized,format='jpg',cmap="Greys_r")   #my_cmap
+
+
+'''
+ig=cv2.imread('run91_2.jpg')
+cmap = plt.get_cmap('jet')
+
+rgba_img = cmap(ig)
+#plt.imshow(rgba_img[:,:,1,1], cmap=my_cmap)
+#plt.show()
+plt.imsave('run91.jpg',rgba_img[:,:,1,1],format='jpg',cmap=my_cmap)
+'''
