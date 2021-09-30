@@ -135,31 +135,42 @@ time.sleep(7)
 time.sleep(5)
 for i in range(1,ystep+1):
     for j in range(1,xstep+1):
+        try:
+            os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m "+str(pasox)+":0")
+            print("stoped")
+            for h in range(1,capturasxposicion+1):
 
-        os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m "+str(pasox)+":0")
-        print("stoped")
-        for h in range(1,capturasxposicion+1):
-        
+                try:
+                  p1 = Process(target=tomaimagen)
+                  p1.start()
+                  p2 = Process(target=tubo)
+                  p2.start()
+                except:
+                  print ('error')
+
+                matrix[i-1,j-1]=h
+                print(matrix)
+
+                time.sleep(43)
+                sys.stdout.write("va por la captura "+str(h)+" de "+str(capturasxposicion))
+                sys.stdout.flush()
+
+
+        except KeyboardInterrupt:
+            print ('\nPausing...  (Hit ENTER to continue, type quit to exit.)')
             try:
-              p1 = Process(target=tomaimagen)
-              p1.start()
-              p2 = Process(target=tubo)
-              p2.start()
-            except:
-              print ('error')
-              
-            matrix[i-1,j-1]=h
-            print(matrix)
-            
-            time.sleep(43)
-            sys.stdout.write("va por la captura "+str(h)+" de "+str(capturasxposicion))
-            sys.stdout.flush()
- 
-    return_val=-pasox*(xstep+1)
+                response = input()
+                if response == 'quit':
+                    break
+                print ('Resuming...')
+            except KeyboardInterrupt:
+                print ('Resuming...')
+                continue
+        return_val=-pasox*(xstep+1)
     os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:"+str(pasoy))
     os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m "+str(return_val))
-
-
+        
+        
 print('\x1b[7;37;42m'+"▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒X-RAYs OFF          ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"+'\x1b[0m')
 print('\x1b[7;37;42m'+"▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒Escaneo finalizado  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"+'\x1b[0m')
 time.sleep(10)
