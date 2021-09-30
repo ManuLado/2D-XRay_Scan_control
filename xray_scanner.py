@@ -166,7 +166,7 @@ for i in range(1,ystep+1):
             except KeyboardInterrupt:
                 print ('Resuming...')
                 continue
-        return_val=-pasox*(xstep+1)
+    return_val=-pasox*(xstep+1)
     os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:"+str(pasoy))
     os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m "+str(return_val))
         
