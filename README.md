@@ -1,6 +1,6 @@
 # 2D-XRay Scan Control
 
-
+![superponer](https://user-images.githubusercontent.com/77543157/135559269-e34afabd-3760-43ed-93ca-e18cb184d90e.jpg)
 
 _Acá va un párrafo que describa lo que es el proyecto_
 
