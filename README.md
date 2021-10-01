@@ -16,7 +16,15 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 _Que cosas necesitas para instalar el software y como instalarlas_
 
 ```
-Da un ejemplo
+sudo raspi-config
+
+sudo apt-get install saods9
+
+sudo apt-get install python
+
+sudo apt-get install python-opencv
+
+sudo pip install astropy
 ```
 
 ### Instalación 🔧
@@ -85,7 +93,7 @@ Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones
 
 _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
+* **Gerardo Manuel Lado** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
 * **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
 
 También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
@@ -94,25 +102,9 @@ También puedes mirar la lista de todos los [contribuyentes](https://github.com/
 
 Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
 
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* etc.
 
 
 
 ---
-⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
+⌨️ con ❤️ por [Villanuevand](https://github.com/ManuLado/) 😊
 
-
-sudo raspi-config
-
-sudo apt-get install saods9
-
-sudo apt-get install python
-
-sudo apt-get install python-opencv
-
-sudo pip install astropy
