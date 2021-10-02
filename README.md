@@ -116,9 +116,11 @@ Para resolver esto, pausar el script y
 
 * El tubo RX no enciende/ el rele se activa pero el buzzer del tubo RX no suena.
 
-   ➡️ pausar el script y esperar mas tiempo para que el tubo RX
+   ➡️ pausar el script y esperar mas tiempo para que el tubo RX se enfrie
       
    ➡️ comprobar que la puerta del blindaje este bien cerrada
+   
+   ➡️ comprobar que las conexiones del rele al tubo funcionen
 
 ## Despliegue 📦
 
