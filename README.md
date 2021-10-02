@@ -64,8 +64,8 @@ las imagenes procesadas apareceran guardadas en formato .jpg en el nuevo directo
 
 _Estos scripts utilizan los paquetes para manipular el sensor Arducam MT9M001 (ArduCAM_REV_A_USB_Camera_Shield-master.zip)
 y un sistema de movimiento KKMoon Laser Engraver (kkengraver-master.zip)_
-
-
+Manuales de usuario - [ArducamMT9M001 ](Arducam_MT9M001_DataSheet_C.pdf)
+                    - [Manual imax70 ](Manual imax70.pdf)
 ### Instalación 🔧
 
 
