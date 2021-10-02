@@ -1,9 +1,9 @@
-# 2D-XRay Scan Control
+# 2D-XRay Scan Control ☢
 
 ![superponer](https://user-images.githubusercontent.com/77543157/135559269-e34afabd-3760-43ed-93ca-e18cb184d90e.jpg)
 
-_Scripts python para el control de un sistema de movimiento automatizado para la adquisicion de imagenes radiografi-cas de muestras biologicas.
-Implementa una captura de im ́agenes cada vezque el sistema se detiene, y guarda la imagen en un directorio nuevo cada vez quese corre el programa, con nombre ordenado segun las coordenadas en las cuales se tomo. Se controla la cantidad de im ́agenes que se quiere adquirir ası como la distancia maxima que se mueve el sistema entre adquisiciones. El sistema realiza un barridoen *y* para cada *x*, con una distancia por paso igual a la mitad del ancho H y alto V del sensor de imagen. 
+Scripts python para el control de un sistema de movimiento automatizado para la adquisicion de imagenes radiograficas de muestras biologicas.
+Implementa una captura de im ́agenes cada vezque el sistema se detiene, y guarda la imagen en un directorio nuevo cada vez quese corre el programa, con nombre ordenado segun las coordenadas en las cuales se tomo. Se controla la cantidad de imagenes que se quiere adquirir ası como la distancia maxima que se mueve el sistema entre adquisiciones. El sistema realiza un barrido en *y* para cada *x*, con una distancia por paso igual a la mitad del ancho H y alto V del sensor de imagen. 
 
 ## Comenzando 🚀
 
@@ -19,9 +19,40 @@ correr *xray_scanner.py* desde un interprete con Python 3 o
 sudo python3 xray_scanner.py
 ```
 El programa tiene como input el tamaño de barrido en el plano x-y. Luego de insertar estas dimensiones, el programa imprime en pantalla el tamaño de la matriz de barrido calculada, y un tiempo estimado de duracion del escaneo completo.
+```
+xstep: 7
+ystep: 8
+duracion estimada: 214.66666666666666 minutos (  3.5777777777777775  horas)
+x-->
+y
+|
+v
+[[0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]]
+....................................................................................
+press enter
+```
 
+Al presionar ENTER se comenzara el ciclo de escaneo.
 
+☢ ⚠ Mantener la distancia al tubo de RX! ⚠ ☢
 
+La matriz se ira actualizando a medida que se capturen las imagenes
+
+Una vez finalizado el escaneo, las imagenes obtenidas apareceran guardadas en formato .fits en el nuevo directorio */fecha_nombredemuestra_run_numero*
+
+para procesar estas imagenes (sumarlas, eliminar imagenes oscuras y filtrar ruido), ejecutar el script *procesado.py*
+
+```
+sudo python3 procesado.py
+```
+las imagenes procesadas apareceran guardadas en formato .jpg en el nuevo directorio */fecha_nombredemuestra_run_numero_FFT*
 ### Pre-requisitos 📋
 * python 3
 * astropy
@@ -112,7 +143,7 @@ Device open fail!
 ```
 Para resolver esto, pausar el script y
 
-   ➡️ revisar los cables de conexion a la camara
+      ➡️ revisar los cables de conexion a la camara
 
 * El tubo RX no enciende/ el rele se activa pero el buzzer del tubo RX no suena.
 
@@ -122,14 +153,9 @@ Para resolver esto, pausar el script y
    
    ➡️ comprobar que las conexiones del rele al tubo funcionen
 
-## Despliegue 📦
-
-_Agrega notas adicionales sobre como hacer deploy_
-
 
 ## Autores ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
 
 * **Gerardo Manuel Lado** - *Trabajo Inicial* - [Lado](https://github.com/ManuLado)
 
