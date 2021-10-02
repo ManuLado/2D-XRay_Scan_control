@@ -10,14 +10,19 @@ Implementa una captura de im ́agenes cada vezque el sistema se detiene, y guard
 Descargar los archivos de la version v2.0 : 
 * xray_scanner.py y 
 * procesado.py
-
-Mira **Deployment** para conocer como desplegar el proyecto.
-
+* engraver.py
+* take_images.py
+Guardarlos en un directorio en Raspberry Pi (probado en una Raspberry Pi 3 con OS Raspbian 2020-12-02)
+correr xray_scanner.py desde un interprete con Python 3 o 
+```
+sudo python3 xray_scanner.py
+```
 
 ### Pre-requisitos 📋
 
 _Que cosas necesitas para instalar el software y como instalarlas_
-
+Estos scripts utilizan los paquetes para manipular el sensor Arducam MT (ArduCAM_REV_A_USB_Camera_Shield-master)
+y un sistema de movimiento KKMoon Laser Engraver: 
 ```
 sudo raspi-config
 
