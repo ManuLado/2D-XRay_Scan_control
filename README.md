@@ -21,9 +21,8 @@ sudo python3 xray_scanner.py
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
-Estos scripts utilizan los paquetes para manipular el sensor Arducam MT (ArduCAM_REV_A_USB_Camera_Shield-master)
-y un sistema de movimiento KKMoon Laser Engraver: 
+_Estos scripts utilizan los paquetes para manipular el sensor Arducam MT9M001 (ArduCAM_REV_A_USB_Camera_Shield-master)
+y un sistema de movimiento KKMoon Laser Engraver: _
 ```
 sudo raspi-config
 
