@@ -2,11 +2,11 @@
 
 ![superponer](https://user-images.githubusercontent.com/77543157/135559269-e34afabd-3760-43ed-93ca-e18cb184d90e.jpg)
 
-_Acá va un párrafo que describa lo que es el proyecto_
+_Scripts python para el control de un sistema de movimiento automatizado para la adquisicion de imagenes radiografi-cas de muestras biologicas. _
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+_Descargar los archivos de la version v2.0 : $xray_scanner.py$ y $procesado.py$._
 
 Mira **Deployment** para conocer como desplegar el proyecto.
 
