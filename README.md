@@ -110,13 +110,13 @@ Para continuar se debe presionar cualquier tecla o ENTER
 ...
 Device open fail!
 ```
-      revisar los cables de conexion a la camara
+    1. revisar los cables de conexion a la camara
 
 * El tubo RX no enciende/ el rele se activa pero el buzzer del tubo RX no suena.
 
-      pausar el script y esperar mas tiempo para que el tubo RX
+    1. pausar el script y esperar mas tiempo para que el tubo RX
       
-      comprobar que la puerta del blindaje este bien cerrada
+    2. comprobar que la puerta del blindaje este bien cerrada
 
 ## Despliegue 📦
 
