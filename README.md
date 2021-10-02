@@ -76,7 +76,11 @@ sudo python take_images.py imtst 1
 ```
 * Testear que el sistema KKMoon funcione correctamente
 ```
-
+python3 engraver.py -d /dev/ttyUSB0 --no-fan -H       #home
+python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 50    #mueve 50 pasos en x
+python3 engraver.py -d /dev/ttyUSB0 --no-fan -m -50   #mueve -50 pasos en x
+python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:50  #mueve 50 pasos en y
+python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:-50 #mueve -50 pasos en x
 ```
 
 ### Analice las pruebas end-to-end 🔩
