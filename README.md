@@ -136,7 +136,7 @@ _Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios
 
 ## Licencia 📄
 
-Este proyecto está bajo la Licencia MIT . No se provee ninguna garantia de funcionamiento- mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la Licencia MIT . No se provee ninguna garantia de funcionamiento- mira el archivo [LICENSE.md](https://github.com/ManuLado/2D-XRay_Scan_control/blob/3eca928331250517cc78e94c35404e0f9dcaa60b/LICENCE.md) para detalles
 Los autores se eximen de cualquier responsabilidad por el uso de este software.
 
 
