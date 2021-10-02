@@ -18,14 +18,30 @@ correr *xray_scanner.py* desde un interprete con Python 3 o
 ```
 sudo python3 xray_scanner.py
 ```
-El programa tiene como input el tamaño de barrido en el plano x-y. Luego de insertar estas dimensiones, el programa imprime en pantalla
+El programa tiene como input el tamaño de barrido en el plano x-y. Luego de insertar estas dimensiones, el programa imprime en pantalla el tamaño de la matriz de barrido calculada, y un tiempo estimado de duracion del escaneo completo.
 
 
 
 ### Pre-requisitos 📋
+* python 3
+* astropy
+* opencv 2
+* numpy
+* matplotlib
+* Pillow>=5.2.0
+* pyserial>=3.4
 
-_Estos scripts utilizan los paquetes para manipular el sensor Arducam MT9M001 (ArduCAM_REV_A_USB_Camera_Shield-master)
-y un sistema de movimiento KKMoon Laser Engraver: _
+_Estos scripts utilizan los paquetes para manipular el sensor Arducam MT9M001 (ArduCAM_REV_A_USB_Camera_Shield-master.zip)
+y un sistema de movimiento KKMoon Laser Engraver (kkengraver-master.zip)_
+```
+```
+
+### Instalación 🔧
+
+_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+
+_Dí cómo será ese paso_
+
 ```
 sudo raspi-config
 
@@ -36,16 +52,10 @@ sudo apt-get install python
 sudo apt-get install python-opencv
 
 sudo pip install astropy
-```
 
-### Instalación 🔧
+pip3 install matplotlib
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
 ```
 
 _Y repite_
@@ -56,7 +66,7 @@ hasta finalizar
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
-## Ejecutando las pruebas ⚙️
+## Ejecutando las pruebas y checklist ⚙️✅
 
 _Explica como ejecutar las pruebas automatizadas para este sistema_
 
@@ -67,8 +77,8 @@ _Explica que verifican estas pruebas y por qué_
 ```
 Da un ejemplo
 ```
-
-### Y las pruebas de estilo de codificación ⌨️
+ 
+### Posibles problemas ❌ ⁉️ 
 
 _Explica que verifican estas pruebas y por qué_
 
