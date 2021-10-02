@@ -110,7 +110,7 @@ Para continuar se debe presionar cualquier tecla o ENTER
 ...
 Device open fail!
 ```
-.
+Para resolver esto, pausar el script y
 
    ➡️ revisar los cables de conexion a la camara
 
