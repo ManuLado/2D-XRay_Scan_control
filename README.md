@@ -33,8 +33,7 @@ El programa tiene como input el tamaño de barrido en el plano x-y. Luego de ins
 
 _Estos scripts utilizan los paquetes para manipular el sensor Arducam MT9M001 (ArduCAM_REV_A_USB_Camera_Shield-master.zip)
 y un sistema de movimiento KKMoon Laser Engraver (kkengraver-master.zip)_
-```
-```
+
 
 ### Instalación 🔧
 
