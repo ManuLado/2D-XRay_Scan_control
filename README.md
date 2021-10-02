@@ -45,11 +45,15 @@ El primer paso es configurar el puerto de la camara y habilitar los puertos seri
 ```
 sudo raspi-config
 ```
+
 Para listar los puertos USB escribir
+
 ```
 lsusb
 ```
+
 Instalar los paquetes necesarios
+
 ```
 sudo apt-get install saods9
 
@@ -60,7 +64,7 @@ sudo apt-get install python-opencv
 sudo pip install astropy
 
 pip3 install matplotlib
-
+```
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
