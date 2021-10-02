@@ -12,6 +12,7 @@ Descargar los archivos de la version v2.0 :
 * procesado.py
 * engraver.py
 * take_images.py
+
 Guardarlos en un directorio en Raspberry Pi (probado en una Raspberry Pi 3 con OS Raspbian 2020-12-02)
 correr xray_scanner.py desde un interprete con Python 3 o 
 ```
