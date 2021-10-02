@@ -96,19 +96,24 @@ python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:-50 #mueve -50 pasos en x
 
 ### Analice las pruebas end-to-end 🔩
 
-_Explica que verifican estas pruebas y por qué_
+El programa puede ser pausado durante el ciclo de escaneo, presionando
 
 ```
-Da un ejemplo
+Ctrl + C
 ```
- 
+Para continuar se debe presionar cualquier tecla o ENTER
 ### Posibles problemas ❌ ⁉️ 
 
-_Explica que verifican estas pruebas y por qué_
+* La camara no responde/las imagenes no son capturadas. Aparecera un mensaje indicando
 
 ```
-Da un ejemplo
+...
+Device open fail!
 ```
+revisar los cables de conexion a la camara
+
+* El tubo no enciende/ el rele se activa pero el buxxer del tubo no suena
+pausar el script y esperar mas tiempo
 
 ## Despliegue 📦
 
