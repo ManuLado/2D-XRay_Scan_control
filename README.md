@@ -1,4 +1,4 @@
-# 2D-XRay Scan Control ☢
+# 2D-XRay Scan Control 🔬☢
 
 ![superponer](https://user-images.githubusercontent.com/77543157/135559269-e34afabd-3760-43ed-93ca-e18cb184d90e.jpg)
 
@@ -125,7 +125,7 @@ python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:50  #mueve 50 pasos en y
 python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:-50 #mueve -50 pasos en x
 ```
 
-### Analice las pruebas end-to-end 🔩
+### Pausado del ciclo ⏸
 
 El programa puede ser pausado durante el ciclo de escaneo, presionando
 
