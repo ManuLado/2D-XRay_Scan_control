@@ -40,11 +40,13 @@ y un sistema de movimiento KKMoon Laser Engraver (kkengraver-master.zip)_
 
 _Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-_Dí cómo será ese paso_
+El primer paso es configurar el puerto de la camara y habilitar los puertos seriales en caso de ser necesario entrando a 
 
 ```
 sudo raspi-config
-
+```
+Instalar los paquetes necesarios
+```
 sudo apt-get install saods9
 
 sudo apt-get install python
@@ -68,7 +70,14 @@ _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para 
 
 ## Ejecutando las pruebas y checklist ⚙️✅
 
-_Explica como ejecutar las pruebas automatizadas para este sistema_
+* Primero testear si funciona el sensor de la camara
+```
+sudo python take_images.py imtst 1
+```
+* Testear que el sistema KKMoon funcione correctamente
+```
+
+```
 
 ### Analice las pruebas end-to-end 🔩
 
