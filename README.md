@@ -110,6 +110,8 @@ Para continuar se debe presionar cualquier tecla o ENTER
 ...
 Device open fail!
 ```
+
+
     ➡️ revisar los cables de conexion a la camara
 
 * El tubo RX no enciende/ el rele se activa pero el buzzer del tubo RX no suena.
