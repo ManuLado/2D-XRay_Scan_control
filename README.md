@@ -45,6 +45,10 @@ El primer paso es configurar el puerto de la camara y habilitar los puertos seri
 ```
 sudo raspi-config
 ```
+Para listar los puertos USB escribir
+```
+lsusb
+```
 Instalar los paquetes necesarios
 ```
 sudo apt-get install saods9
