@@ -18,6 +18,9 @@ correr xray_scanner.py desde un interprete con Python 3 o
 ```
 sudo python3 xray_scanner.py
 ```
+El programa tiene como input el tamaño de barrido en el plano x-y. Luego de insertar estas dimensiones, el programa imprime en pantalla
+
+
 
 ### Pre-requisitos 📋
 
