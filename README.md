@@ -66,7 +66,19 @@ sudo pip install astropy
 pip3 install matplotlib
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+_Es recomendable controlar la Raspberry Pi remotamente, para reducir el riesgo a exposicion a radiacion ionizante. Se puede manejer desde Windows siempre que ambos dispositivos se encuentren conectados a la misma red. Para ello instalar xrdp en la raspberry_
+```
+sudo apt-get install xrdp
+```
+y encontrar su ip con
+```
+ifconfig
+```
+Acceder desdee Windows (10) a la aplicacion  ‘Remote Desktop Connection’, escribir la direccion ip de la raspberry y conectar.
+El usuario y contraseña para acceder a la Raspberry son los predeterminados:
+* Username: pi
+* password: raspberry
+
 
 ## Ejecutando las pruebas y checklist ⚙️✅
 
