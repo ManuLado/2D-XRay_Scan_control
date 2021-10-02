@@ -2,11 +2,14 @@
 
 ![superponer](https://user-images.githubusercontent.com/77543157/135559269-e34afabd-3760-43ed-93ca-e18cb184d90e.jpg)
 
-_Scripts python para el control de un sistema de movimiento automatizado para la adquisicion de imagenes radiografi-cas de muestras biologicas. _
+_Scripts python para el control de un sistema de movimiento automatizado para la adquisicion de imagenes radiografi-cas de muestras biologicas.
+Implementa una captura de im ́agenes cada vezque el sistema se detiene, y guarda la imagen en un directorio nuevo cada vez quese corre el programa, con nombre ordenado seg ́un las coordenadas en las cuales setom ́o. Se controla la cantidad de im ́agenes que se quiere adquirir as ́ı como la distanciam ́axima que se mueve el sistema entre adquisiciones. El sistema realiza un barridoenypara cadax, con una distancia por paso igual a la mitad del ancho H y alto Vdel sensor de image_
 
 ## Comenzando 🚀
 
-_Descargar los archivos de la version v2.0 : $xray_scanner.py$ y $procesado.py$._
+_Descargar los archivos de la version v2.0 : 
+* xray_scanner.py y 
+* procesado.py._
 
 Mira **Deployment** para conocer como desplegar el proyecto.
 
