@@ -63,9 +63,13 @@ las imagenes procesadas apareceran guardadas en formato .jpg en el nuevo directo
 * pyserial>=3.4
 
 _Estos scripts utilizan los paquetes para manipular el sensor Arducam MT9M001 (ArduCAM_REV_A_USB_Camera_Shield-master.zip)
-y un sistema de movimiento KKMoon Laser Engraver (kkengraver-master.zip)_
-Manuales de usuario - [ArducamMT9M001 ](Arducam_MT9M001_DataSheet_C.pdf)
-                    - [Manual imax70 ](Manual imax70.pdf)
+y un sistema de movimiento KKMoon Laser Engraver (kkengraver-master.zip). Controla un tubo de RX Imax 70 mediante rele_
+
+Manuales de usuario 
+
+- [ArducamMT9M001 ](Arducam_MT9M001_DataSheet_C.pdf)
+
+- [Manual imax70 ](https://github.com/ManuLado/2D-XRay_Scan_control/blob/e308626ca804fb6c267cc8a0bede5e536d1170f2/Manual%20imax70.pdf)
 ### Instalación 🔧
 
 
