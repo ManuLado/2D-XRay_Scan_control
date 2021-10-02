@@ -38,7 +38,7 @@ y un sistema de movimiento KKMoon Laser Engraver (kkengraver-master.zip)_
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+
 
 El primer paso es configurar el puerto de la camara y habilitar los puertos seriales en caso de ser necesario entrando a 
 
@@ -61,14 +61,6 @@ sudo pip install astropy
 
 pip3 install matplotlib
 
-
-```
-
-_Y repite_
-
-```
-hasta finalizar
-```
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
