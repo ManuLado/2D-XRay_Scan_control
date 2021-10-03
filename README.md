@@ -108,7 +108,7 @@ y encontrar su ip con
 ```
 ifconfig
 ```
-Acceder desdee Windows (10) a la aplicacion  ‘Remote Desktop Connection’, escribir la direccion ip de la raspberry y conectar.
+Acceder desde Windows (10) a la aplicacion  ‘Remote Desktop Connection’, escribir la direccion ip de la raspberry y conectar.
 El usuario y contraseña para acceder a la Raspberry son los predeterminados:
 * Username: pi
 * password: raspberry
@@ -141,13 +141,13 @@ Para continuar se debe presionar cualquier tecla o ENTER
 
 * La camara no responde/las imagenes no son capturadas. Aparecera un mensaje indicando
 
-```
-...
-Device open fail!
-```
-Para resolver esto, pausar el script y
+   ```
+   ...
+   Device open fail!
+   ```
+   Para resolver esto, pausar el script y
 
-      ➡️ revisar los cables de conexion a la camara
+   ➡️ revisar los cables de conexion a la camara
 
 * El tubo RX no enciende/ el rele se activa pero el buzzer del tubo RX no suena.
 
