@@ -3,7 +3,7 @@
 ![superponer](https://user-images.githubusercontent.com/77543157/135559269-e34afabd-3760-43ed-93ca-e18cb184d90e.jpg)
 
 Scripts python para el control de un sistema de movimiento automatizado para la adquisicion de imagenes radiograficas de muestras biologicas.
-Implementa una captura de im ́agenes cada vezque el sistema se detiene, y guarda la imagen en un directorio nuevo cada vez quese corre el programa, con nombre ordenado segun las coordenadas en las cuales se tomo. Se controla la cantidad de imagenes que se quiere adquirir ası como la distancia maxima que se mueve el sistema entre adquisiciones. El sistema realiza un barrido en *y* para cada *x*, con una distancia por paso igual a la mitad del ancho H y alto V del sensor de imagen. 
+Implementa una captura de imagenes cada vezque el sistema se detiene, y guarda la imagen en un directorio nuevo cada vez quese corre el programa, con nombre ordenado segun las coordenadas en las cuales se tomo. Se controla la cantidad de imagenes que se quiere adquirir ası como la distancia maxima que se mueve el sistema entre adquisiciones. El sistema realiza un barrido en *y* para cada *x*, con una distancia por paso igual a la mitad del ancho H y alto V del sensor de imagen. 
 
 ## Comenzando 🚀
 
@@ -22,7 +22,7 @@ El programa tiene como input el tamaño de barrido en el plano x-y. Luego de ins
 ```
 xstep: 7
 ystep: 8
-duracion estimada: 214.66666666666666 minutos (  3.5777777777777775  horas)
+duracion estimada: 214.66 minutos (  3.57  horas)
 x-->
 y
 |
