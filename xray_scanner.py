@@ -7,12 +7,15 @@ import sys
 import RPi.GPIO as gpio
 from multiprocessing import Process
 import numpy as np
+import subprocess
 
+
+peso=1.3 #Mb
 noitt = 16              #numero de imagenes en cada exposicion
 capturasxposicion = 5   #numero de exposiciones en cada posicion
 steps_per_mm = 19.685   #steps/mm
 sensor_size_x = 6.66/2  #mm
-sensor_size_y = 5.32/2  #mm
+sensor_size_y = 5.32/1.5  #mm
 
 #valores para el sensor
 frec = 50 #Hz    
@@ -45,9 +48,32 @@ def tomaimagen(): #esta funcion y tubo() van sin argumentos para el multiprocess
     global i
     global j
     global h
+    
     os.system("sudo python take_images.py "+dirname+ "/c"+str(h)+"x" +str(j) +"y" +str(i)+'t'+" "+str(noitt))
+    #image_name="dirname"+ "/c"+str(h)+"x" +str(j) +"y" +str(i)+'t'
+    #proc = subprocess.Popen(['sudo', 'python', 'take_images.py',image_name,str(noitt)], stdin=subprocess.PIPE, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+    #tomaimagen.camera_output_string=proc.communicate()
+    
+def check_camera(i,j,h,dirname):
+    
+    if os.path.exists(dirname+ "/c"+str(h)+"x" +str(j) +"y" +str(i)+'t'+"10.fits"):
+        return True
+    else:
+        return False
     
     
+from astropy.io import fits
+def check_tubo(i,j,h,dirname):
+    imagen_fits=fits.open(dirname+ "/c"+str(h)+"x" +str(j) +"y" +str(i)+'t'+"10.fits")
+    imag=imagen_fits[0].data
+    if np.count_nonzero(imag > np.mean(100))>100:
+        #print('el tubo se encendio correctamente') 
+        return True
+    else:
+        return False
+
+
+
 def tubo():
     time.sleep(3)
     print("prende tubo")
@@ -57,7 +83,11 @@ def tubo():
     print("apaga tubo")
     gpio.output(10,True)    #es un rele NORMAL ABIERTO
     print('\x1b[7;37;42m'+"X-RAYs OFF"+'\x1b[0m')
-
+    
+def usb_reset():
+    os.system('sudo sh -c "echo 0 > /sys/bus/usb/devices/usb1/authorized"')
+    os.system('sudo sh -c "echo 1 > /sys/bus/usb/devices/usb1/authorized"')
+    
 
 #/////////////////////////////////
 if not os.path.exists('logdir.txt'):
@@ -73,9 +103,7 @@ with open('logdir.txt','w') as f:
 samplename=input("Nombre de muestra:>>>")
 objetivo=input("Objetivo:>>>")
 
-dirname="../"+str(date.today())+"_"+str(samplename)+"_run_"+str(st)
-print("creating folder "+ dirname +" ...")
-os.system("mkdir "+dirname)
+
 
 xrange=float(input("<<<<ingrese ancho x de muestreo [mm]>>>>"))
 
@@ -91,11 +119,22 @@ ystep=round(steps_per_mm*yrange/pasoy)
 #ystep=1
 
 
-duracion_estimada=xstep*ystep*capturasxposicion*46/60 #minutos
-
+duracion_estimada=round(xstep*ystep*capturasxposicion*46/60,2) #minutos
+espacio_estimado=round(peso*xstep*ystep*capturasxposicion*noitt,2) #Mb
 print('xstep:',xstep)
 print('ystep:',ystep)
 print('duracion estimada:',duracion_estimada,'minutos ( ',duracion_estimada/60,' horas)')
+print('se necesitan:',espacio_estimado,'Mb ( ',espacio_estimado/1024,' Gb) de espacio en disco')
+import shutil
+total, used, free = shutil.disk_usage("/")
+print("Total: %d GiB" % (total // (2**30)))
+print("Used: %d GiB" % (used // (2**30)))
+print("Free: %d GiB" % (free // (2**30)))
+free_space=(free // (2**30))
+if espacio_estimado/1024> free_space:
+    print('el espacio libre en disco es de ',free_space,'Gb')
+    print('no hay suficiente espacio en el disco!')
+    exit()
 
 matrix=np.zeros((ystep,xstep))
 print('x-->')
@@ -106,8 +145,11 @@ print(matrix)
 
 print('....................................................................................')
 input("press enter")
-
+dirname=str(date.today())+"_"+str(samplename)+"_run_"+str(st)
+print("creating folder "+ dirname +" ...")
+os.system("mkdir "+dirname)
 star_time=time.time()
+
 print('\33[33m'+"iniciando...  "+'\x1b[0m')
 
 
@@ -133,40 +175,67 @@ time.sleep(7)
 #os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -H")
 #os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 500")
 time.sleep(5)
+camera_fail=0
+tubo_fail=0
 for i in range(1,ystep+1):
     for j in range(1,xstep+1):
-        try:
-            os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m "+str(pasox)+":0")
-            print("stoped")
-            for h in range(1,capturasxposicion+1):
 
+        for h in range(1,capturasxposicion+1):
+            while True:
+                                                        
                 try:
-                  p1 = Process(target=tomaimagen)
-                  p1.start()
-                  p2 = Process(target=tubo)
-                  p2.start()
-                except:
-                  print ('error')
+                    p1 = Process(target=tomaimagen)
+                    p1.start()
+                    p2 = Process(target=tubo)
+                    p2.start()
+                    
+                    
+                    
+                    time.sleep(40)
 
-                matrix[i-1,j-1]=h
-                print(matrix)
+                    if check_camera(i,j,h,dirname)==False:
+                        print('camera failure: intentando de nuevo...')
+                        camera_fail+=1
+                        usb_reset()
+                        time.sleep(5)
+                    
+                    else:
+                        print('camera success!')
+                        
+                        if check_tubo(i,j,h,dirname)==False:
+                            tubo_fail+=1
+                            print('fallo el tubo: intentando de nuevo...')
+                            time.sleep(3)
+                            
+                        if check_tubo(i,j,h,dirname)==True:
+                            print('La camara y el tubo funcionaron correctamente')                         
+                            time.sleep(3)
+                            break
+                        
+                
+                except KeyboardInterrupt:
+                    print ('\nPausing...  (Hit ENTER to continue, type quit to exit.)')
+                    try:
+                        response = input()
+                        if response == 'quit':
+                            break
+                        print ('Resuming...')
+                    except KeyboardInterrupt:
+                        print ('Resuming...')
+                        continue
+                    
 
-                time.sleep(43)
-                sys.stdout.write("va por la captura "+str(h)+" de "+str(capturasxposicion))
-                sys.stdout.flush()
+                
+            matrix[i-1,j-1]=h
+            print(matrix)
 
 
-        except KeyboardInterrupt:
-            print ('\nPausing...  (Hit ENTER to continue, type quit to exit.)')
-            try:
-                response = input()
-                if response == 'quit':
-                    break
-                print ('Resuming...')
-            except KeyboardInterrupt:
-                print ('Resuming...')
-                continue
-    return_val=-pasox*(xstep+1)
+            sys.stdout.write("va por la captura "+str(h)+" de "+str(capturasxposicion))
+            sys.stdout.flush()
+
+        os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m "+str(pasox)+":0")
+        print("stoped")
+    return_val=-pasox*(xstep)
     os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m 0:"+str(pasoy))
     os.system("python3 engraver.py -d /dev/ttyUSB0 --no-fan -m "+str(return_val))
         
@@ -220,6 +289,8 @@ with open(str(dirname)+'/log.txt','w') as f:
     f.write('frecuencia de muestreo [Hz]: '+str(frec)+"\n")
     f.write('numero de imagenes por captura: '+str(noitt)+"\n")
     f.write('numero capturas por posicion: '+str(capturasxposicion)+"\n")
+    f.write('veces que fallo la camara: '+str(camera_fail)+"\n")
+    f.write('veces que fallo el tubo: '+str(tubo_fail)+"\n")
     f.write('-----------valores de los registros en take_images.py----------- '+"\n")
     for p in range(79,112):
         f.write(str(content[p])+"\n")
@@ -227,5 +298,5 @@ with open(str(dirname)+'/log.txt','w') as f:
 print("log file saved as log.txt")
 print('runtime----'+str(time.time()-star_time)+' seconds ----')
 
-buzzer(3,10)
+buzzer(11,10)
 print('...finished')
