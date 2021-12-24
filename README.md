@@ -170,7 +170,7 @@ Este proyecto está bajo la Licencia MIT . No se provee ninguna garantia de func
 Los autores se eximen de cualquier responsabilidad por el uso de este software.
 
 
-
+![zebra](https://github.com/ManuLado/2D-XRay_Scan_control/blob/3bbab40012a6ca1ad8d53f07fede8cd1fd8991b2/zebra3-yodo.jpg)
 ---
 
 
